@@ -7,20 +7,49 @@ public class Fazendeiro : MonoBehaviour
 {
 
     public int bolsa_carne = 0;
+    public int bolsa_madeira = 0;
+
+
     public GameObject Destino_Carne;
+    public GameObject Destino_Madeira;
     public GameObject Destino_Armazem;
     private NavMeshAgent Agente;
     private float temporizador;
     private Armazem MeuArmazem;
 
+    public enum MeuEstados{Cacador, Lenhador }
+    public MeuEstados EstadoAtual;
     void Start()
     {
         Agente = GetComponent<NavMeshAgent>();
         MeuArmazem = Destino_Armazem.GetComponent<Armazem>();
+
+        int randomico = Random.Range(0, 10);
+        if(randomico < 5)
+        {
+            EstadoAtual = MeuEstados.Lenhador;
+        }
+        else
+        {
+            EstadoAtual = MeuEstados.Cacador;
+        }
+        
     }
 
     // Update is called once per frame
     void Update()
+    {
+        if(EstadoAtual == MeuEstados.Lenhador)
+        {
+            Lenhador();
+        }
+        if(EstadoAtual == MeuEstados.Cacador)
+        {
+            Cacador();
+        }
+    }
+
+    void Cacador()
     {
         if (bolsa_carne < 10)
         {
@@ -38,6 +67,9 @@ public class Fazendeiro : MonoBehaviour
                 }
 
             }
+            else{
+                Agente.speed = 5;
+            }
         }
         else
         {
@@ -52,6 +84,43 @@ public class Fazendeiro : MonoBehaviour
 
             }
         }
-        
+    }
+
+    void Lenhador()
+    {
+        if (bolsa_madeira < 10)
+        {
+            Agente.SetDestination(Destino_Madeira.transform.position);
+            float distancia = Vector3.Distance(transform.position,
+                Destino_Madeira.transform.position);
+            if (distancia < 3)
+            {
+                Agente.speed = 0;
+                temporizador += Time.deltaTime;
+                if (temporizador > 0.5f)
+                {
+                    bolsa_madeira++;
+                    temporizador = 0;
+                }
+
+            }
+            else
+            {
+                Agente.speed = 5;
+            }
+        }
+        else
+        {
+            Agente.speed = 5;
+            Agente.SetDestination(Destino_Armazem.transform.position);
+            float distancia = Vector3.Distance(transform.position,
+                Destino_Armazem.transform.position);
+            if (distancia < 3)
+            {
+                MeuArmazem.ReceberMadeira(bolsa_madeira);
+                bolsa_madeira= 0;
+
+            }
+        }
     }
 }
