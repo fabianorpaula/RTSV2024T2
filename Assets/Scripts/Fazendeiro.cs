@@ -11,11 +11,12 @@ public class Fazendeiro : MonoBehaviour
     public GameObject Destino_Armazem;
     private NavMeshAgent Agente;
     private float temporizador;
-
+    private Armazem MeuArmazem;
 
     void Start()
     {
         Agente = GetComponent<NavMeshAgent>();
+        MeuArmazem = Destino_Armazem.GetComponent<Armazem>();
     }
 
     // Update is called once per frame
@@ -46,7 +47,9 @@ public class Fazendeiro : MonoBehaviour
                 Destino_Armazem.transform.position);
             if (distancia < 3)
             {
+                MeuArmazem.ReceberCarne(bolsa_carne);
                 bolsa_carne = 0;
+
             }
         }
         

@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class Armazem : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public int estoque_Carne = 0;
+    public int estoque_Madeira = 0;
+
+    public void ReceberCarne(int carne)
     {
-        
+        estoque_Carne += carne;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ReceberMadeira(int madeira)
     {
-        
+        estoque_Madeira+= madeira;
     }
 }
