@@ -10,7 +10,9 @@ public class Visor : MonoBehaviour
     public TMP_Text Madeira;
     public TMP_Text Ouro;
     public TMP_Text QTDFazenderios;
-    public TMP_Text QTDCasas;
+
+    public Armazem MeuArmazem;
+
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +23,12 @@ public class Visor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Nome.text = MeuArmazem.NomeJogador;
+        Carne.text = "Carne: "+MeuArmazem.estoque_Carne.ToString();
+        Madeira.text = "Madeira: " + MeuArmazem.estoque_Madeira;ToString();
+        int CasaM = MeuArmazem.casas * 5;
+        QTDFazenderios.text = "Fazenderios: " + MeuArmazem.MeusFazendeiros.Count.ToString() + " / " + CasaM.ToString();
         
+       
     }
 }

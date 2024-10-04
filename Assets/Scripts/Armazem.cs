@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Armazem : MonoBehaviour
 {
+    public string NomeJogador;
+    
     public int estoque_Carne = 0;
     public int estoque_Madeira = 0;
     //Cada Casa Habita 5 Pessoas
@@ -77,6 +79,7 @@ public class Armazem : MonoBehaviour
         }
     }
 
+   
     private void Update()
     {
         Temporizador();
