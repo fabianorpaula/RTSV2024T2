@@ -24,16 +24,22 @@ public class Fazendeiro : MonoBehaviour
         Agente = GetComponent<NavMeshAgent>();
         MeuArmazem = Destino_Armazem.GetComponent<Armazem>();
 
-        int randomico = Random.Range(0, 10);
-        if(randomico < 5)
+      
+        
+    }
+
+
+    public void DefineTrabalho(string nomeTrabalho)
+    {
+        
+        if (nomeTrabalho == "Lenhador")
         {
             EstadoAtual = MeuEstados.Lenhador;
         }
-        else
+        if(nomeTrabalho == "Cacador")
         {
             EstadoAtual = MeuEstados.Cacador;
         }
-        
     }
 
     // Update is called once per frame
@@ -93,9 +99,9 @@ public class Fazendeiro : MonoBehaviour
             Agente.SetDestination(Destino_Madeira.transform.position);
             float distancia = Vector3.Distance(transform.position,
                 Destino_Madeira.transform.position);
-            if (distancia < 3)
+            if (distancia < 4)
             {
-                Agente.speed = 0;
+                Agente.speed = 1;
                 temporizador += Time.deltaTime;
                 if (temporizador > 0.5f)
                 {
@@ -123,4 +129,19 @@ public class Fazendeiro : MonoBehaviour
             }
         }
     }
+
+
+    public void InformaCarne(GameObject DCarne)
+    {
+        Destino_Carne = DCarne;
+    }
+    public void InformaMadeira(GameObject DMadeira)
+    {
+        Destino_Madeira = DMadeira;
+    }
+    public void InformaArmazem(GameObject DArmazem)
+    {
+        Destino_Armazem = DArmazem;
+    }
+
 }
