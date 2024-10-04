@@ -74,12 +74,12 @@ public class Fazendeiro : MonoBehaviour
 
             }
             else{
-                Agente.speed = 5;
+                Agente.speed = 15;
             }
         }
         else
         {
-            Agente.speed = 5;
+            Agente.speed = 15;
             Agente.SetDestination(Destino_Armazem.transform.position);
             float distancia = Vector3.Distance(transform.position,
                 Destino_Armazem.transform.position);
@@ -112,12 +112,12 @@ public class Fazendeiro : MonoBehaviour
             }
             else
             {
-                Agente.speed = 5;
+                Agente.speed = 15;
             }
         }
         else
         {
-            Agente.speed = 5;
+            Agente.speed = 15;
             Agente.SetDestination(Destino_Armazem.transform.position);
             float distancia = Vector3.Distance(transform.position,
                 Destino_Armazem.transform.position);

@@ -1899,6 +1899,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   estoque_Carne: 500
   estoque_Madeira: 200
+  casas: 1
   MeusFazendeiros: []
   Trabalhador: {fileID: 3949360422854394687, guid: e290178a673f7484b91b7ef43814871c, type: 3}
   DestinoMadeira: {fileID: 1871706629}
