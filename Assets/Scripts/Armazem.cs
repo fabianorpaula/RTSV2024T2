@@ -17,6 +17,9 @@ public class Armazem : MonoBehaviour
     public GameObject DestinoMadeira;
     public GameObject DestinoCarne;
 
+    public int qtdCacadores;
+    public int qtdLenhadores;
+
 
 
 
@@ -50,6 +53,14 @@ public class Armazem : MonoBehaviour
                 meuTrabalhador.GetComponent<Fazendeiro>().InformaArmazem(this.gameObject);
                 meuTrabalhador.GetComponent<Fazendeiro>().DefineTrabalho(nomeTrabalho);
                 MeusFazendeiros.Add(meuTrabalhador);
+                if(nomeTrabalho == "Cacador")
+                {
+                    qtdCacadores++;
+                }
+                if (nomeTrabalho == "Lenhador")
+                {
+                    qtdLenhadores++;
+                }
             }
         }
     }
@@ -74,12 +85,12 @@ public class Armazem : MonoBehaviour
             Time.timeScale = 0;
         }
 
-        if (estoque_Carne > 250)
+        if (estoque_Carne > 270)
         {
 
             CriaTrabalhador("Cacador");
         }
-        if (estoque_Madeira > 150)
+        if (estoque_Madeira > 170)
         {
             if (casas * 5 == MeusFazendeiros.Count)
             {
@@ -89,6 +100,17 @@ public class Armazem : MonoBehaviour
                 CriaTrabalhador("Lenhador");
             }
         }
+
+
+        //Para Mudar Trabalhador de Funcao
+        //DevoMudarTrabalho("Lenhador");
+        //DevoMudarTrabalho("Cacador");
+        /*
+        if(estoque_Madeira < 50)
+        {
+            DevoMudarTrabalho("Lenhador");
+        }*/
+
     }
 
     public void ReceberCarne(int carne)
@@ -105,7 +127,7 @@ public class Armazem : MonoBehaviour
     void Temporizador()
     {
         meuTempo += Time.deltaTime;
-        if(meuTempo > 10)
+        if(meuTempo > 15)
         {
             estoque_Carne -= MeusFazendeiros.Count*3;
             estoque_Madeira -= MeusFazendeiros.Count *1;
@@ -113,4 +135,31 @@ public class Armazem : MonoBehaviour
         }
 
     }
+
+    public void DevoMudarTrabalho(string necessitoTrbalhador)
+    {
+        int numTrabalhador = Random.Range(0, MeusFazendeiros.Count);
+        if(necessitoTrbalhador == "Lenhador")
+        {
+            if (MeusFazendeiros[numTrabalhador].GetComponent<Fazendeiro>().InformaTrabalho() == "Cacador")
+            {
+                MeusFazendeiros[numTrabalhador].GetComponent<Fazendeiro>().DefineTrabalho("Lenhador");
+                qtdLenhadores++;
+                qtdCacadores--;
+            }
+        }
+
+        if (necessitoTrbalhador == "Cacador")
+        {
+            if (MeusFazendeiros[numTrabalhador].GetComponent<Fazendeiro>().InformaTrabalho() == "Lenhador")
+            {
+                MeusFazendeiros[numTrabalhador].GetComponent<Fazendeiro>().DefineTrabalho("Cacador");
+                qtdLenhadores--;
+                qtdCacadores++;
+            }
+        }
+
+      
+    }
+
 }

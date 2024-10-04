@@ -123,6 +123,8 @@ public class Fazendeiro : MonoBehaviour
                 Destino_Armazem.transform.position);
             if (distancia < 3)
             {
+
+
                 MeuArmazem.ReceberMadeira(bolsa_madeira);
                 bolsa_madeira= 0;
 
@@ -144,4 +146,19 @@ public class Fazendeiro : MonoBehaviour
         Destino_Armazem = DArmazem;
     }
 
+    public string InformaTrabalho()
+    {
+        if (EstadoAtual == MeuEstados.Lenhador)
+        {
+            return "Lenhador";
+
+        }else if (EstadoAtual == MeuEstados.Cacador)
+        {
+            return "Cacador";
+        }
+        else
+        {
+            return "Vazio";
+        }
+    }
 }
