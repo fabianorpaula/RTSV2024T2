@@ -33,10 +33,10 @@ public class Armazem : MonoBehaviour
     {
         Time.timeScale = 5;
         CriaTrabalhador("Rico");
-        CriaTrabalhador("Cacador");
-        CriaTrabalhador("Cacador");
-        CriaTrabalhador("Lenhador");
-        CriaTrabalhador("Mineiro");
+        //CriaTrabalhador("Cacador");
+        //CriaTrabalhador("Cacador");
+        //CriaTrabalhador("Lenhador");
+        //CriaTrabalhador("Mineiro");
     }
 
 
