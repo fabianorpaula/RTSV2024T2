@@ -8,6 +8,7 @@ public class Armazem : MonoBehaviour
     
     public int estoque_Carne = 0;
     public int estoque_Madeira = 0;
+    public int pontos_Riqueza = 0;
     //Cada Casa Habita 5 Pessoas
     public int casas = 1;
     private float meuTempo;
@@ -18,6 +19,7 @@ public class Armazem : MonoBehaviour
     //Informacoes de Locais
     public GameObject DestinoMadeira;
     public GameObject DestinoCarne;
+    public GameObject DestinoRiqueza;
 
     public int qtdCacadores;
     public int qtdLenhadores;
@@ -28,7 +30,7 @@ public class Armazem : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 5;
-        CriaTrabalhador("Cacador");
+        CriaTrabalhador("Rico");
         CriaTrabalhador("Cacador");
         CriaTrabalhador("Cacador");
         CriaTrabalhador("Lenhador");
@@ -52,6 +54,7 @@ public class Armazem : MonoBehaviour
                     Quaternion.identity);
                 meuTrabalhador.GetComponent<Fazendeiro>().InformaCarne(DestinoCarne);
                 meuTrabalhador.GetComponent<Fazendeiro>().InformaMadeira(DestinoMadeira);
+                meuTrabalhador.GetComponent<Fazendeiro>().InformaRiqueza(DestinoRiqueza);
                 meuTrabalhador.GetComponent<Fazendeiro>().InformaArmazem(this.gameObject);
                 meuTrabalhador.GetComponent<Fazendeiro>().DefineTrabalho(nomeTrabalho);
                 MeusFazendeiros.Add(meuTrabalhador);
@@ -124,6 +127,11 @@ public class Armazem : MonoBehaviour
     public void ReceberMadeira(int madeira)
     {
         estoque_Madeira+= madeira;
+    }
+
+    public void InformaRiqueza()
+    {
+        pontos_Riqueza++;
     }
 
 

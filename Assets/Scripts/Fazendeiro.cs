@@ -13,11 +13,12 @@ public class Fazendeiro : MonoBehaviour
     public GameObject Destino_Carne;
     public GameObject Destino_Madeira;
     public GameObject Destino_Armazem;
+    public GameObject Destino_Riqueza;
     private NavMeshAgent Agente;
     private float temporizador;
     private Armazem MeuArmazem;
 
-    public enum MeuEstados{Cacador, Lenhador }
+    public enum MeuEstados{Cacador, Lenhador, Vagabundagem }
     public MeuEstados EstadoAtual;
     void Start()
     {
@@ -40,6 +41,10 @@ public class Fazendeiro : MonoBehaviour
         {
             EstadoAtual = MeuEstados.Cacador;
         }
+        if (nomeTrabalho == "Rico")
+        {
+            EstadoAtual = MeuEstados.Vagabundagem;
+        }
     }
 
     // Update is called once per frame
@@ -52,6 +57,10 @@ public class Fazendeiro : MonoBehaviour
         if(EstadoAtual == MeuEstados.Cacador)
         {
             Cacador();
+        }
+        if (EstadoAtual == MeuEstados.Vagabundagem)
+        {
+            Vagabundagem();
         }
     }
 
@@ -133,6 +142,36 @@ public class Fazendeiro : MonoBehaviour
     }
 
 
+
+
+    void Vagabundagem()
+    {
+
+        Agente.SetDestination(Destino_Riqueza.transform.position);
+        float distancia = Vector3.Distance(transform.position,
+            Destino_Riqueza.transform.position);
+        if (distancia < 3)
+        {
+            Agente.speed = 0;
+            temporizador += Time.deltaTime;
+            if (temporizador > 1f)
+            {
+                MeuArmazem.InformaRiqueza();
+                temporizador = 0;
+            }
+
+        }
+        else
+        {
+            Agente.speed = 15;
+        }
+
+
+    }
+
+
+
+
     public void InformaCarne(GameObject DCarne)
     {
         Destino_Carne = DCarne;
@@ -146,8 +185,14 @@ public class Fazendeiro : MonoBehaviour
         Destino_Armazem = DArmazem;
     }
 
+    public void InformaRiqueza(GameObject DRiqueza)
+    {
+        Destino_Riqueza = DRiqueza;
+    }
+
     public string InformaTrabalho()
     {
+        
         if (EstadoAtual == MeuEstados.Lenhador)
         {
             return "Lenhador";
