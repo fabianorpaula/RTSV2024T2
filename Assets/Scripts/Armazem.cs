@@ -8,6 +8,7 @@ public class Armazem : MonoBehaviour
     
     public int estoque_Carne = 0;
     public int estoque_Madeira = 0;
+    public int estoque_Ouro = 0;
     public int pontos_Riqueza = 0;
     //Cada Casa Habita 5 Pessoas
     public int casas = 1;
@@ -20,11 +21,12 @@ public class Armazem : MonoBehaviour
     public GameObject DestinoMadeira;
     public GameObject DestinoCarne;
     public GameObject DestinoRiqueza;
+    public GameObject DestinoOuro;
 
     public int qtdCacadores;
     public int qtdLenhadores;
 
-
+    public int incrementoBolsa = 0;
 
 
     private void Start()
@@ -34,7 +36,7 @@ public class Armazem : MonoBehaviour
         CriaTrabalhador("Cacador");
         CriaTrabalhador("Cacador");
         CriaTrabalhador("Lenhador");
-        CriaTrabalhador("Lenhador");
+        CriaTrabalhador("Mineiro");
     }
 
 
@@ -55,6 +57,7 @@ public class Armazem : MonoBehaviour
                 meuTrabalhador.GetComponent<Fazendeiro>().InformaCarne(DestinoCarne);
                 meuTrabalhador.GetComponent<Fazendeiro>().InformaMadeira(DestinoMadeira);
                 meuTrabalhador.GetComponent<Fazendeiro>().InformaRiqueza(DestinoRiqueza);
+                meuTrabalhador.GetComponent<Fazendeiro>().InformaOuro(DestinoOuro);
                 meuTrabalhador.GetComponent<Fazendeiro>().InformaArmazem(this.gameObject);
                 meuTrabalhador.GetComponent<Fazendeiro>().DefineTrabalho(nomeTrabalho);
                 MeusFazendeiros.Add(meuTrabalhador);
@@ -82,9 +85,24 @@ public class Armazem : MonoBehaviour
         }
     }
 
-   
+   private void EvoluaTrabalhador()
+    {
+        if(estoque_Ouro >= 100)
+        {
+            estoque_Ouro -= 100;
+            incrementoBolsa++;
+        }
+
+    }
     private void Update()
     {
+        if(estoque_Ouro > 100)
+        {
+            EvoluaTrabalhador();
+        }
+        
+
+
         Temporizador();
         if(estoque_Carne < 0 || estoque_Madeira < 0)
         {
@@ -127,6 +145,11 @@ public class Armazem : MonoBehaviour
     public void ReceberMadeira(int madeira)
     {
         estoque_Madeira+= madeira;
+    }
+
+    public void ReceberOuro(int ouro)
+    {
+        estoque_Ouro += ouro;
     }
 
     public void InformaRiqueza()

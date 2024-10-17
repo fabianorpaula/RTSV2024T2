@@ -26,7 +26,8 @@ public class Visor : MonoBehaviour
     {
         Nome.text = MeuArmazem.NomeJogador;
         Carne.text = "Carne: "+MeuArmazem.estoque_Carne.ToString();
-        Madeira.text = "Madeira: " + MeuArmazem.estoque_Madeira;ToString();
+        Madeira.text = "Madeira: " + MeuArmazem.estoque_Madeira.ToString();
+        Ouro.text = "Ouro: " + MeuArmazem.estoque_Ouro.ToString();
         int CasaM = MeuArmazem.casas * 5;
         QTDFazenderios.text = "Fazenderios: " + MeuArmazem.MeusFazendeiros.Count.ToString() + " / " + CasaM.ToString();
         Ricos.text = "Ricos: "+MeuArmazem.pontos_Riqueza.ToString();

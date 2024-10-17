@@ -8,17 +8,21 @@ public class Fazendeiro : MonoBehaviour
 
     public int bolsa_carne = 0;
     public int bolsa_madeira = 0;
+    public int bolsa_ouro = 0;
 
 
     public GameObject Destino_Carne;
     public GameObject Destino_Madeira;
     public GameObject Destino_Armazem;
+    public GameObject Destino_Ouro;
     public GameObject Destino_Riqueza;
     private NavMeshAgent Agente;
     private float temporizador;
     private Armazem MeuArmazem;
 
-    public enum MeuEstados{Cacador, Lenhador, Vagabundagem }
+    public int incrementoBolsa = 0;
+
+    public enum MeuEstados{Cacador, Lenhador, Mineiro, Vagabundagem }
     public MeuEstados EstadoAtual;
     void Start()
     {
@@ -45,6 +49,10 @@ public class Fazendeiro : MonoBehaviour
         {
             EstadoAtual = MeuEstados.Vagabundagem;
         }
+        if (nomeTrabalho == "Mineiro")
+        {
+            EstadoAtual = MeuEstados.Mineiro;
+        }
     }
 
     // Update is called once per frame
@@ -62,11 +70,18 @@ public class Fazendeiro : MonoBehaviour
         {
             Vagabundagem();
         }
+        if (EstadoAtual == MeuEstados.Mineiro)
+        {
+            Mineracao();
+        }
+
+
+        incrementoBolsa = MeuArmazem.incrementoBolsa;
     }
 
     void Cacador()
     {
-        if (bolsa_carne < 10)
+        if (bolsa_carne  < 10 + incrementoBolsa)
         {
             Agente.SetDestination(Destino_Carne.transform.position);
             float distancia = Vector3.Distance(transform.position,
@@ -101,9 +116,50 @@ public class Fazendeiro : MonoBehaviour
         }
     }
 
+
+    void Mineracao()
+    {
+        if (bolsa_ouro  < 10 + incrementoBolsa)
+        {
+            Agente.SetDestination(Destino_Ouro.transform.position);
+            float distancia = Vector3.Distance(transform.position,
+                Destino_Ouro.transform.position);
+            if (distancia < 4)
+            {
+                Agente.speed = 1;
+                temporizador += Time.deltaTime;
+                if (temporizador > 0.5f)
+                {
+                    bolsa_ouro++;
+                    temporizador = 0;
+                }
+
+            }
+            else
+            {
+                Agente.speed = 15;
+            }
+        }
+        else
+        {
+            Agente.speed = 15;
+            Agente.SetDestination(Destino_Armazem.transform.position);
+            float distancia = Vector3.Distance(transform.position,
+                Destino_Armazem.transform.position);
+            if (distancia < 3)
+            {
+
+
+                MeuArmazem.ReceberOuro(bolsa_ouro);
+                bolsa_ouro = 0;
+
+            }
+        }
+    }
+
     void Lenhador()
     {
-        if (bolsa_madeira < 10)
+        if (bolsa_madeira  < 10 + incrementoBolsa)
         {
             Agente.SetDestination(Destino_Madeira.transform.position);
             float distancia = Vector3.Distance(transform.position,
@@ -188,6 +244,10 @@ public class Fazendeiro : MonoBehaviour
     public void InformaRiqueza(GameObject DRiqueza)
     {
         Destino_Riqueza = DRiqueza;
+    }
+    public void InformaOuro(GameObject DOuro)
+    {
+        Destino_Ouro = DOuro;
     }
 
     public string InformaTrabalho()
