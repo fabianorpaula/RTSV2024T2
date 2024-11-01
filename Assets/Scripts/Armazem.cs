@@ -30,14 +30,14 @@ public class Armazem : MonoBehaviour
 
     public bool estadoVila = true;
 
+    public bool primeiraCriacao = false;
+
     private void Start()
     {
         Time.timeScale = 5;
-        CriaTrabalhador("Rico");
-        //CriaTrabalhador("Cacador");
-        //CriaTrabalhador("Cacador");
-        //CriaTrabalhador("Lenhador");
-        //CriaTrabalhador("Mineiro");
+        
+        
+        
     }
 
 
@@ -231,10 +231,287 @@ public class Armazem : MonoBehaviour
         switch (NomeJogador)
         {
             case "João":
+
+                if(primeiraCriacao == false)
+                {
+                    CriaTrabalhador("Rico");
+                    CriaTrabalhador("Cacador");
+                    CriaTrabalhador("Cacador");
+                    CriaTrabalhador("Lenhador");
+                    CriaTrabalhador("Lenhador");
+                    primeiraCriacao = true;
+                }
+
+
+
+                if (estoque_Carne > 360)
+                {
+
+                    CriaTrabalhador("Rico");
+                    CriaTrabalhador("Cacador");
+                    CriaTrabalhador("Lenhador");
+                }
+                if (estoque_Madeira > 150)
+                {
+                    if (casas * 5 == MeusFazendeiros.Count)
+                    {
+
+
+                        CriarCasa();
+                        
+                    }
+                }
+
+                
+
+                break;
+            case "Paulo":
+
+                if (primeiraCriacao == false)
+                {
+                    CriaTrabalhador("Rico");
+                    CriaTrabalhador("Cacador");
+                    //CriaTrabalhador("Cacador");
+                    CriaTrabalhador("Lenhador");
+                    CriaTrabalhador("Mineiro");
+                    primeiraCriacao = true;
+                }
                 if (estoque_Carne > 270)
                 {
 
                     CriaTrabalhador("Cacador");
+                }
+                if (estoque_Madeira > 170)
+                {
+                    if (casas * 5 == MeusFazendeiros.Count)
+                    {
+
+
+                        CriarCasa();
+                        CriaTrabalhador("Lenhador");
+                    }
+                }
+
+                
+
+                break;
+            case "Maria":
+
+                if (primeiraCriacao == false)
+                {
+                    
+                    CriaTrabalhador("Rico");
+                    CriaTrabalhador("Cacador");
+                    CriaTrabalhador("Cacador");
+                    CriaTrabalhador("Cacador");
+                    CriaTrabalhador("Lenhador");
+                    primeiraCriacao = true;
+                }
+                if (estoque_Carne > 600)
+                {
+
+                    CriaTrabalhador("Cacador");
+                    CriaTrabalhador("Rico");
+                }
+                if (estoque_Madeira > 200)
+                {
+                    if (casas * 5 == MeusFazendeiros.Count)
+                    {
+
+
+                        CriarCasa();
+                        CriaTrabalhador("Lenhador");
+                    }
+                }
+
+                //Para Mudar Trabalhador de Funcao
+                //DevoMudarTrabalho("Lenhador");
+                //DevoMudarTrabalho("Cacador");
+                /*
+                if(estoque_Madeira < 50)
+                {
+                    DevoMudarTrabalho("Lenhador");
+                }*/
+
+                break;
+            case "Renan":
+
+                if (primeiraCriacao == false)
+                {
+                    CriaTrabalhador("Rico");
+                    CriaTrabalhador("Lenhador");
+                    CriaTrabalhador("Cacador");
+                    CriaTrabalhador("Cacador");
+                    CriaTrabalhador("Cacador");
+                    primeiraCriacao = true;
+                }
+                if (estoque_Carne > 230)
+                {
+
+                    CriaTrabalhador("Cacador");
+                    CriaTrabalhador("Rico");
+                }
+                if (estoque_Madeira > 140)
+                {
+                    if (casas * 5 == MeusFazendeiros.Count)
+                    {
+
+
+                        CriarCasa();
+                        CriaTrabalhador("Lenhador");
+                        CriaTrabalhador("Mineiro");
+                    }
+                }
+
+                
+
+                break;
+            case "Pablo":
+
+                if (primeiraCriacao == false)
+                {
+
+                    CriaTrabalhador("Lenhador");
+                    CriaTrabalhador("Cacador");
+                    CriaTrabalhador("Cacador");
+                    CriaTrabalhador("Cacador");
+                    CriaTrabalhador("Rico");
+                    primeiraCriacao = true;
+                }
+                if (estoque_Carne > 320)
+                {
+
+                    CriaTrabalhador("Cacador");
+                    CriaTrabalhador("Rico");
+                    CriaTrabalhador("Lenhador");
+                }
+                if (estoque_Madeira > 110)
+                {
+                    if (casas * 5 == MeusFazendeiros.Count)
+                    {
+
+
+                        CriarCasa();
+                        
+                    }
+                }
+
+                
+
+                break;
+            case "Kayro":
+
+                if (primeiraCriacao == false)
+                {
+                    CriaTrabalhador("Lenhador");
+                    CriaTrabalhador("Lenhador");
+                    CriaTrabalhador("Cacador");
+                    CriaTrabalhador("Rico");
+                    CriaTrabalhador("Cacador");
+
+                    primeiraCriacao = true;
+                }
+                if (estoque_Carne > 300)
+                {
+
+                    CriaTrabalhador("Cacador");
+                }
+                if (estoque_Madeira > 170)
+                {
+                    if (casas * 5 == MeusFazendeiros.Count)
+                    {
+
+
+                        CriarCasa();
+                        
+                    }
+                }
+
+                //Para Mudar Trabalhador de Funcao
+                //DevoMudarTrabalho("Lenhador");
+                //DevoMudarTrabalho("Cacador");
+                /*
+                if(estoque_Madeira < 50)
+                {
+                    DevoMudarTrabalho("Lenhador");
+                }*/
+
+                break;
+            case "EricA":
+                if (primeiraCriacao == false)
+                {
+                    CriaTrabalhador("Mineiro");
+                    primeiraCriacao = true;
+                }
+                if (estoque_Carne > 240)
+                {
+
+                    CriaTrabalhador("Cacador");
+                    CriaTrabalhador("Rico");
+                }
+                if (estoque_Madeira > 150)
+                {
+                    if (casas * 5 == MeusFazendeiros.Count)
+                    {
+
+
+                        CriarCasa();
+                        CriaTrabalhador("Lenhador");
+
+                    }
+                }
+
+                
+
+                break;
+            case "ErickY":
+                if (primeiraCriacao == false)
+                {
+                    CriaTrabalhador("Rico");
+                    CriaTrabalhador("Rico");
+                    CriaTrabalhador("Cacador");
+                    CriaTrabalhador("Cacador");
+                    CriaTrabalhador("Lenhador");
+                    //CriaTrabalhador("Cacador");
+
+                    primeiraCriacao = true;
+                }
+                if (estoque_Carne > 300)
+                {
+
+                    CriaTrabalhador("Cacador");
+                    CriaTrabalhador("Lenhador");
+                    CriaTrabalhador("Rico");
+                }
+                if (estoque_Madeira > 300)
+                {
+                    if (casas * 5 == MeusFazendeiros.Count)
+                    {
+
+
+                        CriarCasa();
+                        CriaTrabalhador("Lenhador");
+                    }
+                }
+
+                
+
+                break;
+            case "Leticia":
+                if (primeiraCriacao == false)
+                {
+                    
+                    CriaTrabalhador("Cacador");
+                    CriaTrabalhador("Cacador");
+                    CriaTrabalhador("Cacador");
+                    CriaTrabalhador("Mineiro");
+                    CriaTrabalhador("Rico");
+                    primeiraCriacao = true;
+                }
+                if (estoque_Carne > 900)
+                {
+
+                    CriaTrabalhador("Rico");
                 }
                 if (estoque_Madeira > 170)
                 {
@@ -257,6 +534,94 @@ public class Armazem : MonoBehaviour
                 }*/
 
                 break;
+            case "Matheus":
+
+                if (primeiraCriacao == false)
+                {
+                    CriaTrabalhador("Cacador");
+                    CriaTrabalhador("Cacador");
+                    CriaTrabalhador("Cacador");
+                    CriaTrabalhador("Lenhador");
+                    CriaTrabalhador("Lenhador");
+
+                    primeiraCriacao = true;
+                }
+
+
+
+                if (estoque_Madeira > (MeusFazendeiros.Count * 2f) + 150)
+                {
+                    CriarCasa();
+                }
+
+                if (estoque_Carne > (MeusFazendeiros.Count * 5.5f) + 300)
+                {
+                    if (qtdCacadores < MeusFazendeiros.Count * 0.3f)
+                    {
+                        CriaTrabalhador("Cacador");
+                    }
+                    else if (qtdLenhadores < (MeusFazendeiros.Count / 10) + 1)
+                    {
+                        CriaTrabalhador("Lenhador");
+                    }
+                    else
+                    {
+                        CriaTrabalhador("Rico");
+                    }
+                }
+
+                
+
+                
+
+                break;
+            case "Hugo":
+
+                if (primeiraCriacao == false)
+                {
+                    CriaTrabalhador("Rico");
+                    CriaTrabalhador("Cacador");
+                    CriaTrabalhador("Cacador");
+                    CriaTrabalhador("Lenhador");
+                    CriaTrabalhador("Mineiro");
+                    primeiraCriacao = true;
+                }
+
+
+
+                if (estoque_Carne > 1000)
+                {
+
+                    CriaTrabalhador("Rico");
+                    CriaTrabalhador("Rico");
+                    CriaTrabalhador("Rico");
+                    CriaTrabalhador("Cacador");
+                    CriaTrabalhador("Cacador");
+                    CriaTrabalhador("Lenhador");
+                    CriaTrabalhador("Mineiro");
+                }
+                if (estoque_Madeira > 200)
+                {
+                    if (casas * 5 == MeusFazendeiros.Count)
+                    {
+
+
+                        CriarCasa();
+                       
+                    }
+                }
+
+                //Para Mudar Trabalhador de Funcao
+                //DevoMudarTrabalho("Lenhador");
+                //DevoMudarTrabalho("Cacador");
+                /*
+                if(estoque_Madeira < 50)
+                {
+                    DevoMudarTrabalho("Lenhador");
+                }*/
+
+                break;
+
         }
 
 
