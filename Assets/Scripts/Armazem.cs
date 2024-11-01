@@ -28,6 +28,7 @@ public class Armazem : MonoBehaviour
 
     public int incrementoBolsa = 0;
 
+    public bool estadoVila = true;
 
     private void Start()
     {
@@ -94,46 +95,43 @@ public class Armazem : MonoBehaviour
         }
 
     }
-    private void Update()
+
+    void TempoDeJogo()
     {
-        if(estoque_Ouro > 100)
+        if (estoque_Ouro > 100)
         {
             EvoluaTrabalhador();
         }
-        
+
 
 
         Temporizador();
-        if(estoque_Carne < 0 || estoque_Madeira < 0)
+        if (estoque_Carne < 0 || estoque_Madeira < 0)
         {
-            Time.timeScale = 0;
+            //Time.timeScale = 0;
+            Morreu();
+        }
+    }
+
+    
+
+    void Morreu()
+    {
+        estadoVila = false;
+    }
+
+    private void Update()
+    {
+
+        TempoDeJogo();
+
+        if (estadoVila)
+        {
+            CodigoGame();
+            
         }
 
-        if (estoque_Carne > 270)
-        {
-
-            CriaTrabalhador("Cacador");
-        }
-        if (estoque_Madeira > 170)
-        {
-            if (casas * 5 == MeusFazendeiros.Count)
-            {
-
-
-                CriarCasa();
-                CriaTrabalhador("Lenhador");
-            }
-        }
-
-
-        //Para Mudar Trabalhador de Funcao
-        //DevoMudarTrabalho("Lenhador");
-        //DevoMudarTrabalho("Cacador");
-        /*
-        if(estoque_Madeira < 50)
-        {
-            DevoMudarTrabalho("Lenhador");
-        }*/
+        
 
     }
 
@@ -173,27 +171,97 @@ public class Armazem : MonoBehaviour
     public void DevoMudarTrabalho(string necessitoTrbalhador)
     {
         int numTrabalhador = Random.Range(0, MeusFazendeiros.Count);
-        if(necessitoTrbalhador == "Lenhador")
+
+        //Eu não posso tirar o rico da função dele
+        if (MeusFazendeiros[numTrabalhador].GetComponent<Fazendeiro>().InformaTrabalho() != "Rico")
         {
-            if (MeusFazendeiros[numTrabalhador].GetComponent<Fazendeiro>().InformaTrabalho() == "Cacador")
+            if (necessitoTrbalhador == "Lenhador")
             {
-                MeusFazendeiros[numTrabalhador].GetComponent<Fazendeiro>().DefineTrabalho("Lenhador");
-                qtdLenhadores++;
-                qtdCacadores--;
+                if (MeusFazendeiros[numTrabalhador].GetComponent<Fazendeiro>().InformaTrabalho() != "Lenhador")
+                {
+                    MeusFazendeiros[numTrabalhador].GetComponent<Fazendeiro>().DefineTrabalho("Lenhador");
+                    qtdLenhadores++;
+                    qtdCacadores--;
+                }
+            }
+
+            if (necessitoTrbalhador == "Cacador")
+            {
+                if (MeusFazendeiros[numTrabalhador].GetComponent<Fazendeiro>().InformaTrabalho() != "Cacador")
+                {
+                    MeusFazendeiros[numTrabalhador].GetComponent<Fazendeiro>().DefineTrabalho("Cacador");
+                    qtdLenhadores--;
+                    qtdCacadores++;
+                }
+            }
+
+            if (necessitoTrbalhador == "Mineiro")
+            {
+                if (MeusFazendeiros[numTrabalhador].GetComponent<Fazendeiro>().InformaTrabalho() != "Mineiro")
+                {
+                    MeusFazendeiros[numTrabalhador].GetComponent<Fazendeiro>().DefineTrabalho("Mineiro");
+                    qtdLenhadores--;
+                    qtdCacadores++;
+                }
+            }
+
+            if (necessitoTrbalhador == "Rico")
+            {
+                if (MeusFazendeiros[numTrabalhador].GetComponent<Fazendeiro>().InformaTrabalho() != "Rico")
+                {
+                    MeusFazendeiros[numTrabalhador].GetComponent<Fazendeiro>().DefineTrabalho("Rico");
+                    qtdLenhadores--;
+                    qtdCacadores++;
+                }
             }
         }
 
-        if (necessitoTrbalhador == "Cacador")
-        {
-            if (MeusFazendeiros[numTrabalhador].GetComponent<Fazendeiro>().InformaTrabalho() == "Lenhador")
-            {
-                MeusFazendeiros[numTrabalhador].GetComponent<Fazendeiro>().DefineTrabalho("Cacador");
-                qtdLenhadores--;
-                qtdCacadores++;
-            }
-        }
+    
 
-      
+
     }
+
+
+    //////
+    ///Codigos Jogadores
+    ///
+    void CodigoGame()
+    {
+
+        switch (NomeJogador)
+        {
+            case "João":
+                if (estoque_Carne > 270)
+                {
+
+                    CriaTrabalhador("Cacador");
+                }
+                if (estoque_Madeira > 170)
+                {
+                    if (casas * 5 == MeusFazendeiros.Count)
+                    {
+
+
+                        CriarCasa();
+                        CriaTrabalhador("Lenhador");
+                    }
+                }
+
+                //Para Mudar Trabalhador de Funcao
+                //DevoMudarTrabalho("Lenhador");
+                //DevoMudarTrabalho("Cacador");
+                /*
+                if(estoque_Madeira < 50)
+                {
+                    DevoMudarTrabalho("Lenhador");
+                }*/
+
+                break;
+        }
+
+
+    }
+
+
 
 }

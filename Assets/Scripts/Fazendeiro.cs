@@ -77,6 +77,11 @@ public class Fazendeiro : MonoBehaviour
 
 
         incrementoBolsa = MeuArmazem.incrementoBolsa;
+
+        if(MeuArmazem.estadoVila == false)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     void Cacador()
@@ -260,6 +265,14 @@ public class Fazendeiro : MonoBehaviour
         }else if (EstadoAtual == MeuEstados.Cacador)
         {
             return "Cacador";
+        }
+        else if (EstadoAtual == MeuEstados.Mineiro)
+        {
+            return "Mineiro";
+        }
+        else if (EstadoAtual == MeuEstados.Vagabundagem)
+        {
+            return "Rico";
         }
         else
         {
